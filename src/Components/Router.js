@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom'
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Blog from './Blog';
 import Contact from './Contact';
 import Destination from './Destination';
@@ -28,12 +29,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/destination/',
-                element: <Destinations></Destinations>
+                element: <PrivateRoute><Destinations></Destinations></PrivateRoute>
             },
             {
                 path: '/destination/:name',
                 loader: ({ params }) => fetch(`https://tarvelguru.vercel.app/locations/${params.name}`),
-                element: <Destination></Destination>
+                element: <PrivateRoute><Destination></Destination></PrivateRoute>
             },
             {
                 path: '/blog',

@@ -5,7 +5,7 @@ const Details = ({ hotel }) => {
 
     const { baths, bedroom, beds, cancellation, facilities, guest, image, price, rating } = hotel;
     return (
-        <div className="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50 ">
+        <div className="max-w-xs p-6 rounded-md shadow-md">
             <div>
                 <img src={image} alt="" className="object-cover object-center w-full rounded-md  h-72 dark:bg-gray-500" />
             </div>

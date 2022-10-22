@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { contextProvider } from '../ContextApi/AuthContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Reg = () => {
+
+    const { createUser } = useContext(contextProvider)
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
+        const firstname = form.firstname.value;
+        const lastname = form.lastname.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        console.log(firstname, lastname, email, password)
+
+        createUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                toast.success('Verification Link send to your Mail.')
+            })
+            .catch((error) => {
+                console.error(error)
+                toast.error('Registration incomplete')
+            })
     }
 
 
@@ -17,15 +36,15 @@ const Reg = () => {
             <form onSubmit={handleSubmit} className="space-y-6 ng-untouched ng-pristine ng-valid">
                 <div className="space-y-1 text-sm">
                     <label for="username" className="block dark:text-gray-400">First Name</label>
-                    <input type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 focus:dark:border-violet-400" />
+                    <input type="text" name="firstname" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 focus:dark:border-violet-400" />
                 </div>
                 <div className="space-y-1 text-sm">
                     <label for="username" className="block dark:text-gray-400">Last Name</label>
-                    <input type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 focus:dark:border-violet-400" />
+                    <input type="text" name="lastname" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 focus:dark:border-violet-400" />
                 </div>
                 <div className="space-y-1 text-sm">
                     <label for="username" className="block dark:text-gray-400">Email</label>
-                    <input type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 focus:dark:border-violet-400" />
+                    <input type="text" name="email" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 focus:dark:border-violet-400" />
                 </div>
                 <div className="space-y-1 text-sm">
                     <label for="password" className="block dark:text-gray-400">Password</label>
@@ -34,7 +53,7 @@ const Reg = () => {
                         <a rel="noopener noreferrer" href="/">Forgot Password?</a>
                     </div>
                 </div>
-                <button className="block w-full p-3 text-center rounded-sm  dark:bg-violet-400">Sign in</button>
+                <button className="block w-full p-3 text-center rounded-sm  bg-slate-900 text-white">register</button>
             </form>
             <div className="flex items-center pt-4 space-x-1">
                 <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
@@ -61,6 +80,7 @@ const Reg = () => {
             <p className="text-xs text-center sm:px-6 dark:text-gray-400">Already have an account
                 <Link to='/login' rel="noopener noreferrer" href="/" className="underline dark:text-gray-100"> login</Link>
             </p>
+            <Toaster></Toaster>
         </div>
     );
 };

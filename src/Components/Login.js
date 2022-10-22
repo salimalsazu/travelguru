@@ -1,7 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { contextProvider } from '../ContextApi/AuthContext';
 
 const Login = () => {
+
+    const { signIn } = useContext(contextProvider);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -9,6 +17,22 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
+
+        signIn(email, password)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true });
+                toast.success('Login Successful')
+            })
+            .catch((error) => {
+                console.error(error)
+                toast.error('Something wrong, pls try agin')
+            })
+
+
+
+
     }
 
 
@@ -55,6 +79,7 @@ const Login = () => {
             <p className="text-xs text-center sm:px-6 dark:text-gray-400">Don't have an account?
                 <Link to='/reg' rel="noopener noreferrer" href="/" className="underline dark:text-gray-100"> Sign up</Link>
             </p>
+            <Toaster></Toaster>
         </div>
     );
 };
