@@ -1,0 +1,6 @@
+.bg-img {
+    background: linear-gradient(360deg, #121212 5%, rgba(18, 18, 18, 0.5) 100%), url('../Assets/img/Rectangle\ 1.png');
+    height: 100vh;
+    width: 100%;
+
+}
