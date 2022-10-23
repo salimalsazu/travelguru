@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Details = ({ hotel }) => {
     console.log(hotel);
@@ -26,6 +27,9 @@ const Details = ({ hotel }) => {
                 <div className='flex justify-between mt-5'>
                     <p className='text-gray-700 font-bold'>Price: {price} <span className='text-gray-500 font-extralight' >/night</span> </p>
                     <p>Ratings: {rating}</p>
+                </div>
+                <div>
+                    <Link to={`/booking/${hotel.hotel}`} ><button className='bg-yellow-300 text-gray-700 font-bold px-10 py-2 mt-5' >Booking</button></Link>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom'
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Blog from './Blog';
+import Booking from './Booking';
 import Contact from './Contact';
 import Destination from './Destination';
 import Destinations from './Destinations';
@@ -35,6 +36,11 @@ export const router = createBrowserRouter([
                 path: '/destination/:name',
                 loader: ({ params }) => fetch(`https://tarvelguru.vercel.app/locations/${params.name}`),
                 element: <PrivateRoute><Destination></Destination></PrivateRoute>
+            },
+            {
+                path: '/booking/:name',
+                loader: ({ params }) => fetch(`https://tarvelguru.vercel.app/hotel/${params.name}`),
+                element: <Booking></Booking>
             },
             {
                 path: '/blog',
