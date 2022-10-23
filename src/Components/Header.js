@@ -45,7 +45,7 @@ const Header = () => {
                             user && user?.uid ?
 
                                 <div >
-                                    <p className='text-white mr-4' >{user.email}</p>
+                                    <p className='text-white mr-4' >{user.displayName}</p>
                                     <button onClick={hanleLogOut} className='bg-red-400 px-6 py-0.5 rounded-md' >signout</button>
                                 </div>
                                 :

@@ -30,17 +30,17 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/destination/',
-                element: <PrivateRoute><Destinations></Destinations></PrivateRoute>
+                element: <Destinations></Destinations>
             },
             {
                 path: '/destination/:name',
                 loader: ({ params }) => fetch(`https://tarvelguru.vercel.app/locations/${params.name}`),
-                element: <PrivateRoute><Destination></Destination></PrivateRoute>
+                element: <Destination></Destination>
             },
             {
                 path: '/booking/:name',
                 loader: ({ params }) => fetch(`https://tarvelguru.vercel.app/hotel/${params.name}`),
-                element: <Booking></Booking>
+                element: <PrivateRoute><Booking></Booking></PrivateRoute>
             },
             {
                 path: '/blog',

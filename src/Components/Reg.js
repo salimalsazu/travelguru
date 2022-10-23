@@ -5,7 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Reg = () => {
 
-    const { createUser } = useContext(contextProvider)
+    const { createUser, updateUserProfile } = useContext(contextProvider)
 
 
     const handleSubmit = (e) => {
@@ -21,6 +21,7 @@ const Reg = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+                handleUpdateUserProfile(firstname)
                 toast.success('Verification Link send to your Mail.')
             })
             .catch((error) => {
@@ -28,6 +29,18 @@ const Reg = () => {
                 toast.error('Registration incomplete')
             })
     }
+
+    const handleUpdateUserProfile = (firstname) => {
+        const profile = {
+            displayName: firstname
+        }
+
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch((error) => console.error(error))
+
+    }
+
 
 
     return (
